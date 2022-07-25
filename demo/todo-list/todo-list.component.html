@@ -1,0 +1,14 @@
+<div>
+  <input>
+  <button addTask>{{messages.add}}</button>
+</div>
+<div class="content-wrapper">
+  <web-if isEmptyList>
+    <div then>{{messages.emptyState}}</div>
+    <ul else todoList></ul>
+  </web-if>
+  <div>
+    <div completedTaskCounter></div>
+    <ul completedTask></ul>
+  </div>
+</div>
