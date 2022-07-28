@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
-import _template from 'lodash/template';
-import _templateSettings from 'lodash/templateSettings';
+import createHtmlTemplate from '../helpers/createHtmlTemplate';
+
 
 interface ComponentConfig {
   selector: string,
@@ -8,19 +8,24 @@ interface ComponentConfig {
   extends?: string,
   style?: Object,
   providers?: Array<new () => HTMLElement>,
+  slots?: boolean;
+}
+
+interface Slots {
+  [key: string]: string
 }
 
 export default function Component(
-  { selector, template = '', extends: ext, style, providers = [] }: ComponentConfig,
+  { selector, template = '', extends: ext, style, providers = [], slots }: ComponentConfig,
 ) {
   return function<T extends {new (...args: any[]): HTMLElement}>(constructor: T) {
     if (selector.indexOf('-') <= 0) {
       throw new Error('You need at least 1 dash in the custom element name!');
     }
 
-    _templateSettings.interpolate = /{{([\s\S]+?)}}/g;
-
     class CustomElement extends constructor {
+      public $slots: Slots;
+      
       constructor(...args) {
         super(...args);
 
@@ -31,9 +36,18 @@ export default function Component(
           lastChild = provider;
         });
 
+        if (slots) {
+          const slotsWrapper = document.createElement('div');
+          slotsWrapper.innerHTML = this.innerHTML;
+          this.$slots = {};
+          [...slotsWrapper.querySelectorAll('template')].forEach((node) => {
+            this.$slots[node.getAttribute('slot')] = node.innerHTML;
+          });
+        }
+
         if (template) {
-          const compiled = _template(template);
-          lastChild.innerHTML = compiled(this);
+          const htmlTemplate = createHtmlTemplate(template);
+          lastChild.innerHTML = htmlTemplate(this);
         }
 
         if (style) {

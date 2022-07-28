@@ -1,5 +1,5 @@
 import _isEmpty from 'lodash/isEmpty';
-import { Component, State, Ref, OnClick, WebArray, Context } from 'decorators';
+import { Component, State, Ref, On, WebArray, Context } from 'decorators';
 
 import { LOADER_PROVIDER, LoaderProvider } from '../providers/loader/loader.consumer';
 
@@ -39,7 +39,7 @@ export default class TodoListElement extends HTMLElement {
     this.completedTaskList.push(completedTask);
   };
 
-  @OnClick('[addTask]')
+  @On('[addTask]', 'onclick')
   public addTask() {
     if (this.$input.value) {
       this.taskList.push(this.$input.value);

@@ -1,29 +1,23 @@
-import { Component } from '../../decorators';
+import { Component, Attr, OnAttrChange } from '../../decorators';
 
-@Component({ selector: 'web-if' })
+interface WebIfSlots {
+  then: string;
+  else: string;
+}
+
+@Component({ selector: 'web-if', slots: true })
 export default class WebIfDirective extends HTMLElement {
-  private _condition: boolean;
-  private thenTemplate: Element;
-  private elseTemplate: Element;
+  private $slots: WebIfSlots;
+  
+  @Attr('condition', 'boolean') condition: boolean;
 
-  constructor() {
-    super();
-    this.thenTemplate = this.querySelector('[then]') as Element;
-    this.elseTemplate = this.querySelector('[else]') as Element;
-    this.innerHTML = '';
-    this.appendChild(this.condition
-      ? this.thenTemplate.cloneNode(true)
-      : this.elseTemplate.cloneNode(true));
-  }
+  public onConditionChange: (condition: boolean) => void = () => {};
 
-  get condition(): boolean { return this._condition; }
-  set condition(val: boolean) {
-    if (this._condition !== val) {
-      this.innerHTML = '';
-      this.appendChild(val
-        ? this.thenTemplate.cloneNode(true)
-        : this.elseTemplate.cloneNode(true));
-      this._condition = val;
+  @OnAttrChange('condition')
+  conditionChange(condition, oldCondition) {
+    if (condition !== oldCondition) {
+      this.innerHTML = this.condition ? this.$slots.then : this.$slots.else;
+      this.onConditionChange(this.condition);
     }
   }
 }

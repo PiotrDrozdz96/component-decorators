@@ -15,8 +15,16 @@
 | extends  | string (optional) | The extends property, specifies the built-in element your element inherits from, if any (only relevant to customized built-in elements)|
 | style    | CSSStyleDeclarations (optional) | The style property specifies an inline style for an element.                      |
 | providers | Component[] (optional) | Array of components/providers, which become parents of template                           |
+| slots     | boolean (optional)     | Enable slots in custom component                                                          |
 
-Replacement for customElements.define(tagname, element, options). To be put right above the class declaration of the web component.
+Replacement for customElements.define(tagname, element, options). To be put right above the class declaration of the web component. In template you can interpolate paramaters of component lik this `<template slot="{{states.TABLE}}">`. WARNING! It's only initial value. If value will be change, in DOM stay initial value. If you want rerender value use @State decorator or change value in other way. Additionally if component use slots and filled it with own parameters you can use scopeProps to keep interpolate inside template.
+````html
+  <template slot="trow">
+    <tr id="{{ scopeProps('id') }}">
+      <td>{{ scopeProps('name') }}</td>
+    </tr>
+  </template>
+````
 
 ### `@Attr(name, type)`
 
@@ -60,15 +68,16 @@ To be put right above the method of component. Replacement for this.querySelecto
 
 To be put right above the method of component. Method will be call when attribute was change;
 
-### `@OnClick(selector)`
+### `@On(selector, methodName)`
 
 #### Parameters
 
 | Name          | Type   | Description           |
 | ------------- | ------ | --------------------- |
 | selector      | string | Selector for child of component |
+| methodName    | string ex. 'onclick' | determines which method you want set |
 
-To be put right above the method of component. Replacement for this.querySelector(selector).onclick = () => method.call(this)
+To be put right above the method of component. Replacement for this.querySelector(selector)[methodName] = (...props) => method.call(this, ...props)
 
 ### `@Ref(selector)`
 
@@ -129,24 +138,34 @@ To be put right above the array property of component. This decorator is special
 
 ### `<web-if>`
 
-#### Example
+#### Attributes
 
-````html
-  <web-if isEmptyList>
-    <div then>{{messages.emptyState}}</div>
-    <ul else todoList></ul>
-  </web-if>
-````
+| Name          | Type    | Description                                      |
+| ------------- | ------  | ---------------------                            |
+| condition     | boolean | Condition determines which slot will be rendered |
 
-Inside <web-if> tag you must put two element one with attribute `then` and second with attribute `else`. Based on web-if.condition, component render correct element. You can manipulate condition using `@State` decorator.
+#### Methods
 
+| Name          | Description                                      |
+| ------------- | ---------------------                            |
+| onConditionChange: (condition: boolean) => void | Fired when condition will change |
 
-````ts
-  @State({ 'web-if[isEmptyList].condition': _isEmpty })
-  public taskList: Array<string> = [];
-````
+#### Slots
+
+| Name          | Description                       |
+| ------------- | ---------------------             |
+| then          | Rendered when condition is true   |
+| else          | Rendered whend condition is false |
+
 
 ### `<web-router>`
+
+#### Attributes
+
+| Name          | Type                 | Description                                      |
+| ------------- | ------               | ---------------------                            |
+| level         | number (default: 0)  | Determines which url directory will be checked   |
+
 
 `<web-router>` is component changing content based on window.location.pathname. To use web-router you must initialize it like this.
   
@@ -170,6 +189,26 @@ export default class RootComponent extends HTMLElement {
 }
 ````
 
+### `<web-switch>`
+
+#### Attributes
+
+| Name          | Type    | Description                             |
+| ------------- | ------  | ---------------------                   |
+| state         | string  | Determines which slot will be rendered  |
+
+#### Methods
+
+| Name          | Description                                           |
+| ------------- | ---------------------                                 |
+| onStateChange: (state: string) => void | Fired when state will change |
+
+#### Slots
+
+| Name          | Description                               |
+| ------------- | ---------------------                     |
+| String        | Rendered when state is equal as slot name |
+
 ### '<web-link>`
   
 `<web-link>` is special link component which cooperate with `<web-router>`
@@ -180,7 +219,7 @@ export default class RootComponent extends HTMLElement {
 | ------------- | ------ | --------------------- |
 | type          | 'back' \| 'forward' \| 'go' \| 'push' \| 'replace' | Name of method from window.history |
 | delta         | number | argument to back method |
-| data          | any    | state to push and replace method |
+| data          | json   | state to push and replace method |
 | href          | string | href to push and replace method |
   
   
@@ -197,7 +236,44 @@ export default class RootComponent extends HTMLElement {
 | quelifiedName | string | Name of tag. It used in `document.createElement(qualifiedName)`  |
 | params        | ElementParams \| null | Params for created element |
 | children      | Element[] (optional) | Children for created element |
+
+### `createCustomElement(quelifiedName, params, children)`
+
+#### Parameters
   
+| Name          | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| quelifiedName | string | Name of custom tag.   |
+| attributes    | object | Atrtibutes of custom element |
+| props         | object | Other props of custom element |
+
+### `createHtmlTemplate(template: string)`
+
+This function create function template with the same rules i described higher describing @Component decorator.
+
+#### Examples
+
+````ts
+  this.tableRowTemplate = createHtmlTemplate(this.$slots.trow);
+
+  this.innerHtml = template(this);
+````
+
+### `htmlMap(collection, iteratte)`
+
+#### Parameters
+
+| Name          | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| collection    | array of objects | collection to iterrate  |
+| iteratte      | function(item) | callback function to map |
+
+The basic usage is use this function to loop rendering with using template from `createHtmlTemplate`.
+
+````ts
+  this.tbody = htmlMap(collection, this.tableRowTemplate);
+````
+
 ### `new Observable<T>(data: T)`
   
 This class create Observable value

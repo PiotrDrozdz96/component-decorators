@@ -4,8 +4,8 @@
 </div>
 <div class="content-wrapper">
   <web-if isEmptyList>
-    <div then>{{messages.emptyState}}</div>
-    <ul else todoList></ul>
+    <template slot="then">{{messages.emptyState}}</template>
+    <template slot="else"><ul todoList></ul></template>
   </web-if>
   <div>
     <div completedTaskCounter></div>

@@ -1,3 +1,5 @@
+type WebHistoryListener = (ev: PopStateEvent) => any;
+
 class WebHistory {
   back(): void { window.history.back(); }
   forward(): void { window.history.forward(); }
@@ -13,6 +15,12 @@ class WebHistory {
   }
   get scrollRestoration(): ScrollRestoration { return window.history.scrollRestoration; }
   get state(): any { return window.history.state; }
+  addEventListener(listener: WebHistoryListener): void {
+    window.addEventListener('popstate', listener);
+  }
+  removeEventListener(listener: WebHistoryListener): void {
+    window.removeEventListener('popstate', listener);
+  }
 }
 
 const webHistory = new WebHistory();
