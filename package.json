@@ -1,21 +1,25 @@
 {
-  "name": "custom-components",
+  "name": "component-decorators",
   "description": "Web Components Decorators and helpers",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "copy-files": "copyfiles -u 1 src/**/*.css lib/",
-    "build": "tsc --project tsconfig.lib.json && yarn copy-files",
+    "copy-package": "copyfiles ./package.json lib",
+    "copy-gitignore": "copyfiles ./.gitignore lib",
+    "build": "tsc --project tsconfig.lib.json && yarn copy-files && yarn copy-package && yarn copy-gitignore",
     "preview": "vite preview"
   },
-  "files": ["lib/**/*"],
-  "keywords": ["decorators", "web-components", "custom-components"],
-  "author": {
-    "name": "Piotr Drożdż",
-    "email": "drops.piotr96@gmail.com"
-  },
+  "keywords": [
+    "decorators",
+    "custom-elements",
+    "web-components",
+    "custom-components"
+  ],
+  "main": "index.js",
+  "author": "Piotr Drożdż <drops.piotr96@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/PiotrDrozdz96/custom-componentsreadme",
+  "homepage": "https://github.com/PiotrDrozdz96/component-decorators#readme",
   "dependencies": {
     "lodash": "^4.17.21"
   },
@@ -25,5 +29,12 @@
     "sass": "^1.54.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiotrDrozdz96/component-decorators.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PiotrDrozdz96/component-decorators/issues"
   }
 }
