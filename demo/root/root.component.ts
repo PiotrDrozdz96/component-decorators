@@ -8,9 +8,10 @@ import template from './root.component.html';
 import './root.component.scss';
 
 const routes: WebRoutes = {
-  '/1': () => '<div>1</div>',
-  '/2': () => '<div>2</div>',
-  '/todo-list': () => '<app-todo-list></app-todo-list>',
+  '1': () => '<div>1</div>',
+  '2': () => '<div>2</div>',
+  'todo-list': () => '<app-todo-list></app-todo-list>',
+  '**': () => '<div>404</div>',
   default: () => '<div>default</div>',
 };
 

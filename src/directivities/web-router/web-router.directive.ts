@@ -8,10 +8,7 @@ export interface WebRoutes {
   default: () => string;
 }
 
-@Component({
-  selector: 'web-router',
-  style: { position: 'relative', width: '100%', height: '100%' },
-})
+@Component({ selector: 'web-router' })
 export default class WebRouterDirective extends HTMLElement {
   public routes: WebRoutes;
   private subDirectory: string = null;

@@ -79,6 +79,17 @@ To be put right above the method of component. Method will be call when attribut
 
 To be put right above the method of component. Replacement for this.querySelector(selector)[methodName] = (...props) => method.call(this, ...props)
 
+### `#Prop(selector, argument)`
+
+#### Parameters
+
+| Name          | Type   | Description           |
+| ------------- | ------ | --------------------- |
+| selector      | string | Selector for child of component |
+| argument      | string | determines which property you want get |
+
+To be put right above the property of component. Replacement for this.querySelector(selector)[argument]
+
 ### `@Ref(selector)`
 
 #### Parameters
@@ -120,21 +131,24 @@ Other option is change other property of selected element not only innerHtml.
   public array: any[];
 ````
 
+### `@Subscription()`
 
-### `@WebArray(selector, createItem)`
+To be put right above the method of component. Method will be fire inside connectedCallback. Decorated method should return another function which will be fire in disconnectedCallback to unsubscribe.
 
-#### Parameters
-
-| Name          | Type   | Description           |
-| ------------- | ------ | --------------------- |
-| selector      | string | Selector for child of component |
-| createItem    | (item: any, index: number) => HTMLElement | Function changning array elements into HTMLElement |
-
-To be put right above the array property of component. This decorator is special decorator for arrays which expand array prototype to better rerendering. In initial this decorator put into element selected by selector mapped array items. Next you can use methods  of array like pop, push, shift, splice and new method set to change completly elements of array.
 
 ## Directivities
 
 ```` import {} from 'web-components/directivities````
+
+### `<web-for>`
+
+#### Parameters
+
+| Name          | Type    | Description                                      |
+| ------------- | ------  | ---------------------                            |
+| collection    | Observable<Array> | Iterated array                         |
+| initChild     | ($child: HTMLElement) | function will be fire when new child was added to DOM | 
+
 
 ### `<web-if>`
 
@@ -283,6 +297,8 @@ This class create Observable value
 `subscribe((data: T, oldData: T) => void, runInit) => unsubscribe`
   
 `next(data: T) => void;`
+
+`get() => T`
   
 #### Examples
   

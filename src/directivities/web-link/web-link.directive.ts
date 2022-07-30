@@ -1,7 +1,7 @@
 import { Component, Attr } from '../../decorators';
 import webHistory from '../../helpers/webHistory';
 
-import './web-link.component.css';
+import './web-link.directive.css';
 
 type LinkType = 'back' | 'forward' | 'go' | 'push' | 'replace';
 
