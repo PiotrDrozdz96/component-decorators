@@ -2,7 +2,7 @@
 
 ## Decorators
 
-```` import {} from 'web-components-decorators/decorators````
+```` import {} from 'custom-components/decorators````
 
 ### `@Component({ options })`
 
@@ -138,7 +138,7 @@ To be put right above the method of component. Method will be fire inside connec
 
 ## Directivities
 
-```` import {} from 'web-components/directivities````
+```` import {} from 'custom-components/directivities````
 
 ### `<web-for>`
 
@@ -239,7 +239,7 @@ export default class RootComponent extends HTMLElement {
   
 ## Helpers
   
-`import {} from 'web-components-decorators/helpers`
+`import {} from 'custom-components/helpers`
   
 ### `createElement(quelifiedName, params, children)`
   

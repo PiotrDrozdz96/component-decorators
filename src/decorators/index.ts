@@ -5,7 +5,6 @@ export { default as Ref } from './Ref.decorator';
 export { default as OnAttrChange } from './OnAttrChange.decorator';
 export { default as On } from './On.decorator';
 export { default as Listener } from './Listener.decorator';
-export { default as WebArray } from './WebArray.decorator';
 export { default as Context } from './Context.decorator';
 export { default as Prop } from './Prop.decorator';
 export { default as Subscription } from './Subscription.decorator';

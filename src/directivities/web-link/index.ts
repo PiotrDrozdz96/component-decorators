@@ -1,1 +1,1 @@
-export { default } from './web-link.component';
+export { default } from './web-link.directive';

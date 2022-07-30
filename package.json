@@ -1,5 +1,5 @@
 {
-  "name": "web-components-decorators",
+  "name": "custom-components",
   "description": "Web Components Decorators and helpers",
   "version": "1.0.0",
   "scripts": {
@@ -9,13 +9,13 @@
     "preview": "vite preview"
   },
   "files": ["lib/**/*"],
-  "keywords": ["decorators", "web-components"],
+  "keywords": ["decorators", "web-components", "custom-components"],
   "author": {
     "name": "Piotr Drożdż",
     "email": "drops.piotr96@gmail.com"
   },
   "license": "MIT",
-  "homepage": "https://github.com/PiotrDrozdz96/web-components-decorators#readme",
+  "homepage": "https://github.com/PiotrDrozdz96/custom-componentsreadme",
   "dependencies": {
     "lodash": "^4.17.21"
   },
