@@ -1,13 +1,12 @@
 {
   "name": "component-decorators",
   "description": "Web Components Decorators and helpers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "vite",
-    "copy-files": "copyfiles -u 1 src/**/*.css lib/",
-    "copy-package": "copyfiles ./package.json lib",
-    "copy-gitignore": "copyfiles ./.gitignore lib",
-    "build": "tsc --project tsconfig.lib.json && yarn copy-files && yarn copy-package && yarn copy-gitignore",
+    "copy-styles": "copyfiles -u 1 src/**/*.css lib/",
+    "copy-files": "copyfiles ./package.json ./.gitignore ./README.md lib",
+    "build": "tsc --project tsconfig.lib.json && yarn copy-styles && yarn copy-files",
     "preview": "vite preview"
   },
   "keywords": [
