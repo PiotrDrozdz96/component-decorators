@@ -1,4 +1,4 @@
-# Web component decorators
+# Web component decorators &middot; [![npm version](https://img.shields.io/npm/v/component-decorators.svg?style=flat)](https://www.npmjs.com/package/component-decorators)
 
 ## Decorators
 
