@@ -1,4 +1,4 @@
-import { Component, Attr, OnAttrChange } from 'decorators';
+import { Component, Attr, OnAttrChange } from '../../decorators';
 
 interface WebSwitchSlots {
   [key: string]: string,

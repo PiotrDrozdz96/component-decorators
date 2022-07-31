@@ -1,4 +1,4 @@
-import { Component, Attr, OnAttrChange } from 'decorators';
+import { Component, Attr, OnAttrChange } from '../../decorators';
 
 @Component({ selector: 'web-if' })
 export default class WebIfDirective extends HTMLElement {

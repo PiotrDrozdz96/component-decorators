@@ -1,6 +1,6 @@
-import { Component, Attr } from 'decorators';
+import { Component, Attr } from '../../decorators';
 
-import webHistory from 'helpers/webHistory';
+import webHistory from '../../helpers/webHistory';
 
 export interface WebRoutes {
   [key: string]: () => string;

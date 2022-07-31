@@ -1,7 +1,7 @@
 {
   "name": "component-decorators",
   "description": "Web Components Decorators and helpers",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "scripts": {
     "dev": "vite",
     "copy-styles": "copyfiles -u 1 src/**/*.css lib/",
