@@ -9,7 +9,6 @@ import Observable from 'helpers/Observable';
 
 import messages from './todo-list.messages';
 import template from './todo-list.component.html';
-// import { createItem, createCompletedItem } from './todo-list.utils';
 import './todo-list.component.scss';
 
 type Task = {

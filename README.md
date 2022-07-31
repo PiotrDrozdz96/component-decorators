@@ -86,7 +86,7 @@ To be put right above the method of component. Replacement for this.querySelecto
 | Name          | Type   | Description           |
 | ------------- | ------ | --------------------- |
 | selector      | string | Selector for child of component |
-| argument      | string | determines which property you want get |
+| argument      | string | determines which property you want get/set |
 
 To be put right above the property of component. Replacement for this.querySelector(selector)[argument]
 

@@ -10,8 +10,7 @@ export default function OnAttrChange(name: string) {
       target, 'attributeChangedCallback',
     );
 
-    const observedAttributes: Array<string> = observedAttributesDescriptor
-      ? observedAttributesDescriptor.value : [];
+    const observedAttributes: Array<string> = observedAttributesDescriptor?.value || [];
 
     observedAttributes.push(name);
 
@@ -33,10 +32,14 @@ export default function OnAttrChange(name: string) {
 
     Object.defineProperty(target.constructor, 'observedAttributes', {
       get: getter,
+      enumerable: true,
+      configurable: true,
     });
 
     Object.defineProperty(target, 'attributeChangedCallback', {
       value: attributeChangedCallback,
+      enumerable: true,
+      configurable: true,
     });
   };
 }
