@@ -79,7 +79,7 @@ To be put right above the method of component. Method will be call when attribut
 
 To be put right above the method of component. Replacement for this.querySelector(selector)[methodName] = (...props) => method.call(this, ...props)
 
-### `#Prop(selector, argument)`
+### `@Prop(selector, argument)`
 
 #### Parameters
 
